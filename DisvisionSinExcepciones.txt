@@ -1,0 +1,20 @@
+import java.util.Scanner;
+
+public class DivisionEntreCeroSinManejoDeExcepciones
+{
+    public static int cociente(int numerador, int denominador)
+    {
+        return numerador / denominador;
+    }
+    
+	public static void main(String[] args) {
+		Scanner explorador = new Scanner(System.in);
+		
+		System.out.println("Introduce un numerador entero: ");
+		int numerador = explorador.nextInt();
+		System.out.println("Introduce un denominador entero: ");
+		int denominador = explorador.nextInt();
+		
+		int resultado = cociente(numerador,denominador);
+	}
+}
