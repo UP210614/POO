@@ -1,0 +1,27 @@
+import java.util.*;
+
+public class LecturaEnteroPositivo
+{
+	public static void main(String[] args) {
+		int[] vec = {20,45,76,81,34,567,423,6,3,5};
+		Scanner teclado = new Scanner(System.in);
+		int indice;
+		
+		try
+		{
+		    System.out.print("Ingrese un valor entre 0 y 9: ");
+		    indice = teclado.nextInt();
+		    System.out.print("En el vector se almacena en la posicion " + indice + " el valor " + vec[indice]);
+		    
+		}
+		
+		catch(InputMismatchException charException)
+		{
+		    System.out.println("Debe ingresar obligatoriamente número entero");
+		}
+		catch(IndexOutOfBoundsException indexException){
+		    System.out.println("El valor debe estar entre 0 y 9");
+		    System.out.println("Error: " + indexException);
+		}
+	}
+}
