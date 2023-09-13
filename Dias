@@ -1,0 +1,172 @@
+public class MiExcepcion extends Exception
+{ 
+    private int errorCode;
+    
+    public MiExcepcion(int errorCode){
+        this.errorCode = errorCode;
+    }
+    
+    @Override
+    public String getMessage()
+    {
+        return "MiExcepcion: Código de error " + errorCode;
+    }
+
+public static void main(String[] args)
+{
+    int num;
+    try
+    {
+        num = 15;
+        if(num >= 0 && num <= 10)
+        {
+            throw new MiExcepcion(111);
+        }
+        
+        else if(num > 10 && num <= 20)
+        {
+            throw new MiExcepcion(222);
+        }
+        
+        else if(num > 20 && num <= 30)
+        {
+            throw new MiExcepcion(333);
+        }
+    }
+    catch(MiExcepcion ex){
+        System.out.println(ex.getMessage());
+    }
+    
+    }
+}
+
+
+
+//////
+
+public class MyException extends Exception
+{ 
+    private int errorCode;
+    
+    public MyException(int errorCode){
+        this.errorCode = errorCode;
+    }
+    
+    @Override
+    public String getMessage()
+    {
+        return "MiExcepcion: Código de error " + errorCode;
+    }
+
+public static void main(String[] args)
+{
+    int number;
+    try
+    {
+        number = 15;
+        if(number >= 0 && number <= 10)
+        {
+            throw new MyException(111);
+        }
+        
+        else if(number > 10 && number <= 20)
+        {
+            throw new MyException(222);
+        }
+        
+        else if(number > 20 && number <= 30)
+        {
+            throw new MyException(333);
+        }
+    }
+    catch(MyException miexception){
+        System.out.println(miexception.getMessage());
+    }
+    
+    }
+}
+
+
+///////
+
+
+import java.util.*;
+public class MyException extends Exception
+{ 
+    private String errorCode;
+    
+    public MyException(String errorCode){
+        this.errorCode = errorCode;
+    }
+    
+    @Override
+    public String getMessage()
+    {
+        return "Código de error " + errorCode;
+    }
+    
+    public static boolean getLeapYear(int year){
+        if((year%4 == 0 && year%100 != 0) || ( year%400 == 0)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+public static void main(String[] args)
+{
+    
+    Scanner keyboard = new Scanner(System.in);
+    boolean continueLoop = true;
+    int year;
+    int day;
+    int month;
+    int[] lastDayMonth = {31,28,31,30,31,30,31,31,30,31,30,31};
+    do{
+        try
+        {
+            System.out.println("Ingrese su año de nacimiento yyyy: ");
+            year = keyboard.nextInt();
+            if(year > 2023){
+                throw new MyException("Ingrese un año correcto");
+            }
+            
+            System.out.println("Ingrese su mes de nacimiento mm: ");
+            month = keyboard.nextInt();
+            
+            if(month > 12 || month < 1){
+                throw new MyException("Ingrese un mes correcto");
+            }
+            
+            System.out.println("Ingrese su día de nacimiento dd: ");
+            day = keyboard.nextInt();
+            
+            if(getLeapYear(year) == false){
+                
+                if(day > lastDayMonth[month] || day < lastDayMonth[month]){
+                    throw new MyException("Ingrese un día correcto para el mes " + month);
+                }
+        
+            }
+            else if(getLeapYear(year)){
+                if(day > lastDayMonth[month] || day < lastDayMonth[month]){
+                    throw new MyException("Ingrese un día correcto para el mes " + month);
+                }
+            }
+            
+            
+            continueLoop = false;
+        }
+        catch(InputMismatchException charException)
+        {
+            System.out.println("Debe ingresar obligatoriamente número entero");
+		    System.out.println("\nError: " + charException);
+		    keyboard.nextLine();
+        }
+        catch(MyException miexception){
+            System.out.println(miexception.getMessage());
+        }
+    }while(continueLoop);
+    
+    }
+}
