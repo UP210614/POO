@@ -31,7 +31,7 @@ public class Main {
             try {
                 System.out.println("Ingrese su año de nacimiento yyyy: ");
                 birthDateYear = keyboard.nextInt();
-                if (birthDateYear > actualYear) {
+                if (birthDateYear > actualYear || birthDateYear < 0) {
                     throw new MyException("Ingrese un año correcto");
                 }
 
@@ -45,12 +45,13 @@ public class Main {
                 System.out.println("Ingrese su día de nacimiento dd: ");
                 birthDateDay = keyboard.nextInt();
 
+
                 if (getLeapYear(birthDateYear)) {
                     lastDayMonth[1] = 29;
-                    if (birthDateDay > lastDayMonth[birthDateMonth - 1]) {
+                    if ((birthDateDay > lastDayMonth[birthDateMonth - 1]) || birthDateDay <= 0) {
                         throw new MyException("Ingrese un día correcto");
                     }
-                } else if (birthDateDay > lastDayMonth[birthDateMonth - 1]) {
+                } else if ((birthDateDay > lastDayMonth[birthDateMonth - 1])  || birthDateDay <= 0) {
                     throw new MyException("Ingrese un día correcto");
                 }
 
@@ -65,7 +66,7 @@ public class Main {
         } while (continueLoop);
 
         
-        //Contar dias
+       
         ageYears = actualYear - birthDateYear;
         
         ageMonths = actualMonth - birthDateMonth;
