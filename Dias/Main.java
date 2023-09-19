@@ -14,14 +14,14 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner keyboard = new Scanner(System.in);
-        Calendar todaysDate = Calendar.getInstance();
+        Calendar actualDate = Calendar.getInstance();
         boolean continueLoop = true;
-        int todaysDay = todaysDate.get(Calendar.DAY_OF_MONTH);
-        int todaysMonth = todaysDate.get(Calendar.MONTH) + 1;
-        int todaysYear = todaysDate.get(Calendar.YEAR);
-        int bDateYear = 0;
-        int bDateDay = 0;
-        int bDateMonth = 0;
+        int actualDay = actualDate.get(Calendar.DAY_OF_MONTH);
+        int actualMonth = actualDate.get(Calendar.MONTH) + 1;
+        int actualYear = actualDate.get(Calendar.YEAR);
+        int birthDateYear = 0;
+        int birthDateDay = 0;
+        int birthDateMonth = 0;
         int ageYears = 0;
         int ageDays = 0;
         int ageMonths = 0;
@@ -30,27 +30,27 @@ public class Main {
         do {
             try {
                 System.out.println("Ingrese su año de nacimiento yyyy: ");
-                bDateYear = keyboard.nextInt();
-                if (bDateYear > todaysYear) {
+                birthDateYear = keyboard.nextInt();
+                if (birthDateYear > actualYear) {
                     throw new MyException("Ingrese un año correcto");
                 }
 
                 System.out.println("Ingrese su mes de nacimiento mm: ");
-                bDateMonth = keyboard.nextInt();
+                birthDateMonth = keyboard.nextInt();
 
-                if (bDateMonth > 12 || bDateMonth < 1) {
+                if (birthDateMonth > 12 || birthDateMonth < 1) {
                     throw new MyException("Ingrese un mes correcto");
                 }
 
                 System.out.println("Ingrese su día de nacimiento dd: ");
-                bDateDay = keyboard.nextInt();
+                birthDateDay = keyboard.nextInt();
 
-                if (getLeapYear(bDateYear)) {
+                if (getLeapYear(birthDateYear)) {
                     lastDayMonth[1] = 29;
-                    if (bDateDay > lastDayMonth[bDateMonth - 1]) {
+                    if (birthDateDay > lastDayMonth[birthDateMonth - 1]) {
                         throw new MyException("Ingrese un día correcto");
                     }
-                } else if (bDateDay > lastDayMonth[bDateMonth - 1]) {
+                } else if (birthDateDay > lastDayMonth[birthDateMonth - 1]) {
                     throw new MyException("Ingrese un día correcto");
                 }
 
@@ -66,19 +66,19 @@ public class Main {
 
         
         //Contar dias
-        ageYears = todaysYear - bDateYear;
+        ageYears = actualYear - birthDateYear;
         
-        ageMonths = todaysMonth - bDateMonth;
+        ageMonths = actualMonth - birthDateMonth;
         
-        ageDays = todaysDay - bDateDay;
+        ageDays = actualDay - birthDateDay;
  
 
         if (ageDays < 0) {
             ageMonths--;
-            if(bDateDay>todaysDay){
-                ageDays = (lastDayMonth[todaysMonth - 2] - bDateDay) + todaysDay;
+            if(birthDateDay>actualDay){
+                ageDays = (lastDayMonth[actualMonth - 2] - birthDateDay) + actualDay;
             }else{
-                ageDays += lastDayMonth[todaysMonth-1];
+                ageDays += lastDayMonth[actualMonth-1];
             }
             
         }
