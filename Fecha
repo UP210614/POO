@@ -25,9 +25,9 @@ public class MyException extends Exception {
         Scanner keyboard = new Scanner(System.in);
         Calendar actualDate = Calendar.getInstance();
         boolean continueLoop = true;
-        int actualDay = actualDate.get(Calendar.DAY_OF_MONTH);
-        int actualMonth = actualDate.get(Calendar.MONTH) + 1;
-        int actualYear = actualDate.get(Calendar.YEAR);
+        int actualDay = 10;//actualDate.get(Calendar.DAY_OF_MONTH);
+        int actualMonth = 3;//actualDate.get(Calendar.MONTH) + 1;
+        int actualYear = 2024;//actualDate.get(Calendar.YEAR);
         int birthDateYear = 0;
         int birthDateDay = 0;
         int birthDateMonth = 0;
@@ -85,14 +85,22 @@ public class MyException extends Exception {
         ageMonths = actualMonth - birthDateMonth;
         
         ageDays = actualDay - birthDateDay;
+        
+        
  
 
         if (ageDays < 0) {
             ageMonths--;
             if(birthDateDay>actualDay){
+                if(birthDateDay>=lastDayMonth[actualMonth-2]){
+                    ageDays = actualDay;
+                }else{
                 ageDays = (lastDayMonth[actualMonth - 2] - birthDateDay) + actualDay;
-            }else{
+                }
+                
+            }if(birthDateDay<=actualDay){
                 ageDays += lastDayMonth[actualMonth-1];
+                
             }
             
         }
