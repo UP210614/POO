@@ -22,14 +22,9 @@ public class Window03 extends JFrame implements ActionListener
         setResizable(true);
         setLocationRelativeTo(null);
         setTitle("Mi tercera ventana");
-        getContentPane().setBackground(new Color (59, 53, 252));
-        setIconImage(new ImageIcon(getClass().getResource("images/descarga.png")).getImage());
+        getContentPane().setBackground(new Color (255,255,255));
 
         buttonCloseWindow = new JButton("Cerrar");
-        buttonCloseWindow.setBounds(123,280,100,30);
-        buttonCloseWindow.setBackground(new Color(123,280,100,30));
-        buttonCloseWindow.setFont(new Font("Andele Mono",1,14));
-        buttonCloseWindow.setForeground(new Color(0,0,0));
         buttonCloseWindow.addActionListener(this);
         add(buttonCloseWindow);
         
@@ -38,6 +33,12 @@ public class Window03 extends JFrame implements ActionListener
     public static void main(String[] args)
     {
         Window03 firstWindow = new Window03();
+
+        firstWindow.buttonCloseWindow.setBounds(123,280,100,30);
+        firstWindow.buttonCloseWindow.setBackground(new Color(123,280,100,30));
+        firstWindow.buttonCloseWindow.setFont(new Font("Andele Mono",1,14));
+        firstWindow.buttonCloseWindow.setForeground(new Color(0,0,0));
+
     }
     @Override
     public void actionPerformed(ActionEvent e){
@@ -50,3 +51,4 @@ public class Window03 extends JFrame implements ActionListener
         }
     }
 }
+
