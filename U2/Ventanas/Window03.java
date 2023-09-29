@@ -22,7 +22,7 @@ public class Window03 extends JFrame implements ActionListener
         setResizable(true);
         setLocationRelativeTo(null);
         setTitle("Mi tercera ventana");
-        getContentPane().setBackground(new Color (255,255,255));
+        getContentPane().setBackground(new Color (255,0,255));
 
         buttonCloseWindow = new JButton("Cerrar");
         buttonCloseWindow.addActionListener(this);
