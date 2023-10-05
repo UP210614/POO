@@ -8,14 +8,14 @@ public class Window09 extends JFrame implements ActionListener{
 
     private JTextField textFieldScreen;
     private JButton buttonAC, buttonDeleteLast;
-    private JButton buttonAdd, buttonSubstract, buttonMultiply, buttonDivision, buttonPoint, buttonResult;
+    private JButton buttonAdd, buttonSubstract, buttonMultiply, buttonDivision, buttonPoint, buttonResult, buttonPow, buttonRemainder,buttonPi;
     private JButton button0, button1, button2, button3, button4, button5, button6, button7, button8, button9; 
     private JMenuBar menuBar;
-    private JMenu menu;
-    private JMenuItem menuItemOut;
+    private JMenu menu, colorMenu;
+    private JMenuItem menuItemOut, menuItemBlue, menuItemOriginal, menuItemRed;
 
     String texto = "";
-
+    
     public Window09(){
         Font fontTextField = new Font("Bahnschrift Condensed", 1, 32);
         Font fontButton = new Font("Arial",1,28);
@@ -31,9 +31,20 @@ public class Window09 extends JFrame implements ActionListener{
         menu = new JMenu("Opciones");
         menuBar.add(menu);
 
+        colorMenu = new JMenu("Color");
+        menuBar.add(colorMenu);
+
         menuItemOut = new JMenuItem("Salir");
         menuItemOut.addActionListener(this);
         menu.add(menuItemOut);
+
+        menuItemOriginal = new JMenuItem("Original");
+        menuItemOriginal.addActionListener(this);
+        colorMenu.add(menuItemOriginal);
+
+        menuItemBlue = new JMenuItem("Azul");
+        menuItemBlue.addActionListener(this);
+        colorMenu.add(menuItemBlue);
 
         textFieldScreen = new JTextField();
         textFieldScreen.setBounds(5, 5, 280, 50);
@@ -170,6 +181,30 @@ public class Window09 extends JFrame implements ActionListener{
         add(buttonAdd);
         buttonAdd.addActionListener(this);
 
+        buttonPow = new JButton("^");
+        buttonPow.setFont(fontButton);
+        buttonPow.setBackground(colorButtons);
+        buttonPow.setBounds(300, 5, 60, 50);
+        add(buttonPow);
+        buttonPow.addActionListener(this);
+
+        buttonRemainder = new JButton("%");
+        buttonRemainder.setFont(fontButton);
+        buttonRemainder.setBackground(colorButtons);
+        buttonRemainder.setBounds(300, 70, 60, 50);
+        add(buttonRemainder);
+        buttonRemainder.addActionListener(this);
+
+        buttonPi = new JButton("π");
+        buttonPi.setFont(fontButton);
+        buttonPi.setBackground(colorButtons);
+        buttonPi.setBounds(300, 140, 60, 50);
+        add(buttonPi);
+        buttonPi.addActionListener(this);
+
+
+
+
     }
 
     public void actionPerformed(ActionEvent e){
@@ -200,6 +235,18 @@ public class Window09 extends JFrame implements ActionListener{
 
         if(e.getSource() == buttonPoint){
             textFieldScreen.setText(textFieldScreen.getText() + ".");
+        }
+
+        if(e.getSource() == buttonPow){
+            textFieldScreen.setText(textFieldScreen.getText() + "^");
+        }
+
+        if(e.getSource() == buttonRemainder){
+            textFieldScreen.setText(textFieldScreen.getText() + "%");
+        }
+
+        if(e.getSource() == buttonPi){
+            textFieldScreen.setText(textFieldScreen.getText() + "3.1416");
         }
 
         if(e.getSource() == button0){
@@ -253,8 +300,16 @@ public class Window09 extends JFrame implements ActionListener{
                 System.exit(0);
             }
         }
-    }
 
+        if(e.getSource() == menuItemBlue){
+            getContentPane().setBackground(new Color(15, 127, 175));
+        }
+
+        if(e.getSource() == menuItemOriginal){
+            getContentPane().setBackground(null);
+        }
+    }
+    
     public static String Operations(String operations){
         String finalresult = "", operatorOpion = "";
         float value1 = 0f, value2 = 0f;
@@ -264,11 +319,12 @@ public class Window09 extends JFrame implements ActionListener{
         for(int i=0; i<operationSize; i++){
             operator = operations.charAt(i);
 
-            if(operator == '+' || operator == '-' || operator == 'x' || operator == '/' ){
-                value1 = Float.parseFloat(operations.substring(0, i));
-                value2 = Float.parseFloat(operations.substring(i+1, operationSize));
-                operatorOpion = operations.substring(i,i+1);
-            }  
+            if((operator == '+' || operator == '-' || operator == 'x' || operator == '/' || operator == '^' || operator == '%') && i!=0){
+
+                    value1 = Float.parseFloat(operations.substring(0, i));
+                    value2 = Float.parseFloat(operations.substring(i+1, operationSize));
+                    operatorOpion = operations.substring(i,i+1);
+            } 
 
         }
         switch(operatorOpion){
@@ -276,6 +332,8 @@ public class Window09 extends JFrame implements ActionListener{
             case "-": {finalresult = Float.toString(value1-value2); break;}
             case "x": {finalresult = Float.toString(value1*value2); break;}
             case "/": {finalresult = Float.toString(value1/value2); break;}
+            case "^": {finalresult = Double.toString(Math.pow(value1,value2)); break;}
+            case "%": {finalresult = Float.toString((value1*value2)/100); break;}
             default: finalresult = "error";
         }
 
@@ -284,13 +342,12 @@ public class Window09 extends JFrame implements ActionListener{
 
     public static void main(String[] args){
         Window09 basicCalculator = new Window09();
-        basicCalculator.setBounds(0, 0, 305, 470);
+        basicCalculator.setBounds(0, 0, 400, 480);
         basicCalculator.setVisible(true);
         basicCalculator.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         basicCalculator.setResizable(false);
         basicCalculator.setLocationRelativeTo(null);
         basicCalculator.setTitle("First Window");
-        basicCalculator.getContentPane().setBackground(new Color(220,220,220));
     }
     
 }
