@@ -2,12 +2,10 @@ package U2.Ventanas;
 
 import java.awt.*;
 import javax.swing.*;
-import java.awt.geom.*;
 import java.awt.event.*;
 
 public class Window20 extends JFrame
 {   
-    private int colors[][];
     public Window20()
     {
         super("Distribuciones");
