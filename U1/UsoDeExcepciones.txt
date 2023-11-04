@@ -1,46 +1,41 @@
-public class UsoDeExcepciones
-{
+public class UsoDeExcepciones {
 	public static void main(String[] args) {
-		 try
-		 {
-		     metodo1();
-		 }
-		 
-		 catch(Exception excepcion) // atrapa la excepcion lanzada en metodo1
-		 {
-		     System.err.printf("%s\n\n", excepcion.getMessage());
-		     excepcion.printStackTrace(); // imprime el rastreo de la pila excepcion
-		     
-		     //obtiene la informacion de rastreo de la pila
-		     StackTraceElement[] elementosRastreo = excepcion.getStackTrace();
-		     
-		     System.out.println("\nRastreo de la pila getStackTrace: ");
-		     System.out.println("Clase\t\t\tArchivo\t\t\tLinea\tMetodo");
-		     
-		     // itera a través de elementos Rastreo para obtener la descripción de la excepcion
-		     for (StackTraceElement elemento: elementosRastreo)
-		     {
-		        System.out.printf("%s\t", elemento.getClassName());
-		        System.out.printf("%s\t", elemento.getFileName());
-		        System.out.printf("%s\t", elemento.getLineNumber());
-		        System.out.printf("%s\n", elemento.getMethodName());
-		     }
-		 }
+		
+		try {
+			metodo1();
+		}
+
+		catch (Exception excepcion) // atrapa la excepcion lanzada en metodo1
+		{
+			System.err.printf("%s\n\n", excepcion.getMessage());
+			excepcion.printStackTrace(); // imprime el rastreo de la pila excepcion
+
+			// obtiene la informacion de rastreo de la pila
+			StackTraceElement[] elementosRastreo = excepcion.getStackTrace();
+
+			System.out.println("\nRastreo de la pila getStackTrace: ");
+			System.out.println("Clase\t\t\tArchivo\t\t\tLinea\tMetodo");
+
+			// itera a través de elementos Rastreo para obtener la descripción de la
+			// excepcion
+			for (StackTraceElement elemento : elementosRastreo) {
+				System.out.printf("%s\t", elemento.getClassName());
+				System.out.printf("%s\t", elemento.getFileName());
+				System.out.printf("%s\t", elemento.getLineNumber());
+				System.out.printf("%s\n", elemento.getMethodName());
+			}
+		}
 	}
-	
-	public static void metodo1() throws Exception
-	{
-	    metodo2();
+
+	public static void metodo1() throws Exception {
+		metodo2();
 	}
-	
-	public static void metodo2() throws Exception
-	{
-	    metodo3();
+
+	public static void metodo2() throws Exception {
+		metodo3();
 	}
-	
-	public static void metodo3() throws Exception
-	{
-	    throw new Exception("La excepcion se lanzo en metodo3");
+
+	public static void metodo3() throws Exception {
+		throw new Exception("La excepcion se lanzo en metodo3");
 	}
 }
-	

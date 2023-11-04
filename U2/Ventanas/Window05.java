@@ -21,6 +21,7 @@ public class Window05 extends JFrame implements ActionListener{
         buttonAddText = new JButton("Aceptar");
         buttonAddText.setBounds(10,80,100,30);
         add(buttonAddText);
+        buttonAddText.addActionListener(this);
 
         buttonCloseWindow = new JButton("Salir");
         buttonCloseWindow.setBounds(180, 80, 100, 30);

@@ -26,7 +26,7 @@ public class Window04 extends JFrame implements ActionListener{
         add(buttonCloseWindow);
         buttonCloseWindow.addActionListener(this);
 
-        label1 = new JLabel("Presion el botón pinche estupido");
+        label1 = new JLabel("Presion el botón");
         label1.setBounds(10, 10, 200, 60);
         add(label1);
     }
