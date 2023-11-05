@@ -4,20 +4,20 @@ import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
 
-public class JuegoFichas extends JFrame implements ActionListener {
+public class Connect4 extends JFrame implements ActionListener {
 	JMenuBar menuBar;
 	JMenu options;
 	JMenuItem newItem;
 	JButton buttons[][] = new JButton[7][7];
 	JPanel buttonsPanel = new JPanel();
-	ImageIcon foto1 = new ImageIcon(getClass().getResource("images/Mordecai.png"));
-	ImageIcon foto2 = new ImageIcon(getClass().getResource("images/Rigby.png"));
+	ImageIcon iconPlayer1 = new ImageIcon(getClass().getResource("images/Mordecai.png"));
+	ImageIcon iconPlayer2 = new ImageIcon(getClass().getResource("images/Rigby.png"));
 	ImageIcon checkIcon = new ImageIcon();
-	int turno = 1;
+	int player = 1;
 	boolean game = true;
-	int turns = 0;
+	int turnCounter = 0;
 
-	public JuegoFichas() {
+	public Connect4() {
 		buttonsPanel.setLayout(new GridLayout(7, 7));
 
 		menuBar = new JMenuBar();
@@ -54,32 +54,40 @@ public class JuegoFichas extends JFrame implements ActionListener {
 
 		if (e.getSource() == newItem) {
 			cleanBoard();
-			turno = 1;
-			turns = 0;
+			player = 1;
+			turnCounter = 0;
 		}
 
 		for (int i = 0; i < 7; i++) {
 			if (e.getSource() == buttons[0][i]) {
-
 				int k = 7;
 				do {
 					k--;
 				} while (buttons[k][i].getIcon() != null && k > 1);
 
-				if (turno > 0 && buttons[k][i].getIcon() == null) {
-					buttons[k][i].setIcon(foto1);
-					turns++;
-				} else if (turno < 0 && buttons[k][i].getIcon() == null) {
-					buttons[k][i].setIcon(foto2);
-					turns++;
+				if (player > 0 && buttons[k][i].getIcon() == null) {
+					buttons[k][i].setIcon(iconPlayer1);
+					checkWin(k, i);
+					player*=-1;
+					turnCounter++;
+				} else if (player < 0 && buttons[k][i].getIcon() == null) {
+					buttons[k][i].setIcon(iconPlayer2);
+					checkWin(k, i);
+					player*=-1;
+					turnCounter++;
 				}
 
-				checkWin(k, i);
+				if(turnCounter == 42){
+					JOptionPane.showMessageDialog(this, "!Es un empate!", "Conecta 4",
+						JOptionPane.INFORMATION_MESSAGE);
+					game = false;
+					turnCounter = 0;
+					cleanBoard();
+				}
 
-				if (game == false) {
-					turno = 1;
-				} else {
-					turno *= -1;
+				if(game == false) {
+					player = 1;
+					turnCounter = 0;
 				}
 				game = true;
 			}
@@ -87,10 +95,10 @@ public class JuegoFichas extends JFrame implements ActionListener {
 	}
 
 	public void checkWin(int k, int i) {
-		if (turno == 1) {
-			checkIcon = foto1;
+		if (player == 1) {
+			checkIcon = iconPlayer1;
 		} else {
-			checkIcon = foto2;
+			checkIcon = iconPlayer2;
 		}
 
 		int loopCounter = 0;
@@ -108,7 +116,7 @@ public class JuegoFichas extends JFrame implements ActionListener {
 				JOptionPane.showMessageDialog(this, "Gana Jugador 1", "Conecta 4",
 						JOptionPane.INFORMATION_MESSAGE, checkIcon);
 				cleanBoard();
-				turno = 1;
+				player = 1;
 				game = false;
 			}
 		}
@@ -127,7 +135,7 @@ public class JuegoFichas extends JFrame implements ActionListener {
 				JOptionPane.showMessageDialog(this, "Gana Jugador 1", "Conecta 4",
 						JOptionPane.INFORMATION_MESSAGE, checkIcon);
 				cleanBoard();
-				turno = 1;
+				player = 1;
 				game = false;
 			}
 		}
@@ -152,7 +160,7 @@ public class JuegoFichas extends JFrame implements ActionListener {
 						JOptionPane.showMessageDialog(this, "Gana Jugador 1", "Conecta 4",
 								JOptionPane.INFORMATION_MESSAGE, checkIcon);
 						cleanBoard();
-						turno = 1;
+						player = 1;
 						game = false;
 						tokenCounter = 0;
 						break;
@@ -164,7 +172,7 @@ public class JuegoFichas extends JFrame implements ActionListener {
 		tokenCounter = 0;
 		if (game) {
 			for (int f = 1; f < 4; f++) {
-				for (int g = 0; g < 4; g++) {
+				for (int g = 3; g < 7; g++) {
 					int a = f;
 					int b = g;
 					while (buttons[a][b].getIcon() == checkIcon && tokenCounter <= 4) {
@@ -179,7 +187,7 @@ public class JuegoFichas extends JFrame implements ActionListener {
 						JOptionPane.showMessageDialog(this, "Gana Jugador 1", "Conecta 4",
 								JOptionPane.INFORMATION_MESSAGE, checkIcon);
 						cleanBoard();
-						turno = 1;
+						player = 1;
 						game = false;
 						tokenCounter = 0;
 						break;
@@ -200,7 +208,7 @@ public class JuegoFichas extends JFrame implements ActionListener {
 	}
 
 	public static void main(String[] args) {
-		JuegoFichas juego = new JuegoFichas();
+		Connect4 juego = new Connect4();
 		juego.setBounds(0, 0, 600, 600);
 		juego.setVisible(true);
 		juego.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
