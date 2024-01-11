@@ -4,7 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.geom.*;
 import java.awt.event.*;
-//Hola
+//Hola sads
 public class Window21 extends JFrame {
     public Window21() {
         super("Ventas");
